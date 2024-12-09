@@ -579,8 +579,8 @@ class DETRPostProcess(object):
                 bbox_pred
             ],
             axis=-1)
-        bbox_num = paddle.to_tensor(
-            self.num_top_queries, dtype='int32').tile([bbox_pred.shape[0]])
+        bbox_num = paddle.ones(
+            [bbox_pred.shape[0]], dtype='int32') * self.num_top_queries
         bbox_pred = bbox_pred.reshape([-1, 6])
         return bbox_pred, bbox_num, mask_pred
 
